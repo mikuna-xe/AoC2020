@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-
+#!/usr/bin/env python
 
 def CheckIfSum(item, lst, target):
     to_find = target - item
@@ -12,16 +11,16 @@ def CheckIfSum(item, lst, target):
 
 def main():
     arr = []
-    with open('input.txt', r) as f:
+    with open('input.txt', 'r') as f:
         contents = f.read()
-        for num in contents:
-            arr.append(int(num))
-    
+    input_list = contents.strip().split('\n')
+    arr = list(map(int, input_list))
+
     target = 2020
     for i in arr:
         output = CheckIfSum(i, arr, target)
         if output is not None:
-            print output
+            print(output)
             return 0
 
 if __name__ == "__main__":
