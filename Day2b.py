@@ -29,9 +29,14 @@ def main():
     return 0
 
 def CheckPolicy(pos1, pos2, key_char, pwd):
-    
+    a = False
+    b = False
+    if list(pwd)[pos1-1] == key_char:
+        a = True
+    if list(pwd)[pos2-1] == key_char:
+        b = True
     #print("count: {} | {}-{}".format(count, lower, upper))
-    
+    return a != b
 
 if __name__ == "__main__":
     main()
