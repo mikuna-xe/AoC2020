@@ -10,25 +10,25 @@ def main():
 
     bag_dict = ParseContents(arr)
 
-    sum_bags = 0
-    for colour in bag_dict:
-        if SearchColour(bag2find, colour, bag_dict):
-            sum_bags += 1
+    #for colour in bag_dict:
+    print(SearchColour(bag2find, bag_dict))
 
-    print("Bag options: {}".format(sum_bags-1))
+    #print("Bag options: {}".format(sum_bags-1))
     return 0
 
-def SearchColour(target, colour, bag_dict):
-    if colour == target:
-        return True
-    elif bag_dict[colour] == {}:
-        return False
+def SearchColour(target, bag_dict):
+    #if colour != target:
+    #    return 0
+    if bag_dict[target] == {}:
+        return 0
     
-    contains_target = False
-    #print("bag_dict[{}]: {}".format(colour, bag_dict[colour]))
-    for sub_colour in bag_dict[colour]:
-        contains_target = contains_target | SearchColour(target, sub_colour, bag_dict)
-    return contains_target
+    print("bag_dict[{}]: {}".format(target, bag_dict[target]))
+    sum_bags = 0
+    for sub_colour, count in bag_dict[target].items():
+        sum_bags += (count * SearchColour(sub_colour, bag_dict))
+        print(sum_bags)
+        
+    return sum_bags
 
 def ParseContents(arry):
     re_bags = r"(\d+) (\w+ \w+) bag"
@@ -42,7 +42,6 @@ def ParseContents(arry):
             inner_bags[bag[1]] = int(bag[0])
         outer_bags[outer] = inner_bags
     #print(outer_bags)
-
     return outer_bags
 
 if __name__ == "__main__":
