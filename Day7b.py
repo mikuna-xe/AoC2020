@@ -3,31 +3,26 @@ import re
 
 def main():
     arr = []
-    with open('input.txt', 'r') as f:
+    with open('input2.txt', 'r') as f:
         arr = f.readlines()
     #print(arr)
     bag2find = "shiny gold"
-
     bag_dict = ParseContents(arr)
-
-    #for colour in bag_dict:
     print(SearchColour(bag2find, bag_dict))
-
-    #print("Bag options: {}".format(sum_bags-1))
     return 0
 
 def SearchColour(target, bag_dict):
-    #if colour != target:
-    #    return 0
     if bag_dict[target] == {}:
         return 0
     
-    print("bag_dict[{}]: {}".format(target, bag_dict[target]))
+    #print("bag_dict[{}]: {}".format(target, bag_dict[target]))
     sum_bags = 0
     for sub_colour, count in bag_dict[target].items():
-        sum_bags += (count * SearchColour(sub_colour, bag_dict))
-        print(sum_bags)
-        
+        #print("sub_colour, count: {}, {}".format(sub_colour, count))
+        bags_in_bag = SearchColour(sub_colour, bag_dict)
+        #print("bags in '{}' bag: {}".format(sub_colour, sub_colour, bags_in_bag))
+        sum_bags += (count * bags_in_bag + count)
+        #print("sub_colour, sum_bags: {}, {}".format(sub_colour, sum_bags))
     return sum_bags
 
 def ParseContents(arry):
